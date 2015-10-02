@@ -40,7 +40,7 @@ app.get('/api/products', function(req, res){
 
 
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoURI  = 'mongodb://localhost:' + mongoPort + '/testbackend';
+var mongoURI  = 'mongodb://localhost:' + mongoPort + '/fullstack-barebones';
 // mongoose.set('debug', true);
 mongoose.connect(mongoURI);
 mongoose.connection.once('open', function(){
