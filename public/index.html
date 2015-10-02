@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="fullstack-barebones">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body ng-controller="ctrl">
+
+    new product title: <input type="text" ng-model="newProduct.title">
+    <br>
+    new product description: <input type="text" ng-model="newProduct.description">
+    <br>
+    new product price: <input type="number" ng-model="newProduct.price">
+    <br>
+    <input type="button" value="submit" ng-click="postProduct()">
+    <br>
+    <br>
+    <div class="" ng-repeat="product in products">
+      <div class="">{{product.title}}</div>
+      <div class="">{{product.description}}</div>
+      <div class="">{{product.price}}</div>
+      <br>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.js"></script>
+    <script type="text/javascript">
+      angular.module('fullstack-barebones', [])
+        .controller('ctrl', function($scope, srvc){
+          $scope.getProducts = function(){
+            srvc.getProducts().then(function(products){
+              $scope.products = products;
+            })
+          }
+          $scope.getProducts();
+          $scope.postProduct = function(){
+            srvc.postProduct($scope.newProduct).then(function(){
+              $scope.getProducts();
+              $scope.newProduct = {};
+            })
+          }
+        })
+        .service('srvc', function($http){
+          this.getProducts = function(){
+            return $http.get('/api/products').then(function(res){
+              return res.data
+            })
+          }
+          this.postProduct = function(newProduct){
+            return $http.post('/api/products', newProduct)
+          }
+        })
+    </script>
+
+  </body>
+</html>
