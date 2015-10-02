@@ -3,7 +3,7 @@ Terribly minimal fullstack app demonstrating Angular http requests interacting w
 
 - fork and clone this repository
 - run `npm install` to automatically install all dependencies listed in package.json
-- endure that `mongod` is running
+- ensure that `mongod` is running
 - serve the server.js file using `nodemon` or other
 - in your browser, navigate to [http://localhost:8181](http://localhost:8181) to test functionality
 
